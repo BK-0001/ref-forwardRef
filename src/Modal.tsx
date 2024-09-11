@@ -1,4 +1,5 @@
 import { ReactNode, useRef } from "react";
+import { createPortal } from "react-dom";
 
 type Props = {
   title: ReactNode;
@@ -25,12 +26,15 @@ export function Modal({ title, children, onClose }: Props) {
     <>
       <button onClick={handleModalOpen}>Open</button>
 
-      <dialog ref={dialogRef}>
-        <h1>{title}</h1>
-        <div>{children}</div>
+      {createPortal(
+        <dialog ref={dialogRef}>
+          <h1>{title}</h1>
+          <div>{children}</div>
 
-        <button onClick={handleModalClose}>x</button>
-      </dialog>
+          <button onClick={handleModalClose}>x</button>
+        </dialog>,
+        document.getElementById("modal") as HTMLDivElement
+      )}
     </>
   );
 }
