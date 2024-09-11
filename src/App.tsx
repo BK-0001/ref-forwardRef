@@ -1,9 +1,14 @@
 import { useRef, useState } from "react";
+import { Modal } from "./Modal";
 
 function App() {
   const [count, setCount] = useState<number>(0);
 
   const countRef = useRef<number>(0);
+
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  console.log("re-render");
 
   return (
     <div>
@@ -23,6 +28,13 @@ function App() {
       >
         useRef
       </button>
+
+      <div>
+        {/* document.getElementById or document.querySelector("dialog") */}
+        <Modal onClose={() => alert("closed")} title="Some Content Modal">
+          This is now dynamic content
+        </Modal>
+      </div>
     </div>
   );
 }
